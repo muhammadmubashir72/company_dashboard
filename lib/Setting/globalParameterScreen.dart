@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 
-class UserForm extends StatefulWidget {
+class globalParameterScreen extends StatefulWidget {
   @override
-  State<UserForm> createState() => _UserFormState();
+  State<globalParameterScreen> createState() => _globalParameterScreenState();
 }
 
-class _UserFormState extends State<UserForm> {
+class _globalParameterScreenState extends State<globalParameterScreen> {
   String? selectedCompany; // Variable to store selected company
   String? selectedUserType; // Variable to store selected user type
   bool? isAdmin; // Variable to store whether user is admin or not
+  bool isTrue = false; // Initial value for dropdown
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,10 @@ class _UserFormState extends State<UserForm> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.people), // Add your desired icon here
+                  Icon(Icons.public), // Add your desired icon here
                   SizedBox(width: 8), // Adjust spacing as needed
                   Text(
-                    'USERS',
+                    ' GLOBAL PARAMETERS',
                     style: TextStyle(
                       color: Colors.orange,
                       fontSize: 24.0,
@@ -52,26 +53,6 @@ class _UserFormState extends State<UserForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Name'),
-                        SizedBox(height: 7.0),
-                        Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
-                          height: _textFieldHeight,
-                          child: TextFormField(
-                            style: TextStyle(fontSize: 16.0),
-                            decoration: InputDecoration(
-                              hintText: 'Enter Name',
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15.0, vertical: 12.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10.0),
                         Text('Company'),
                         SizedBox(height: 7.0),
                         Container(
@@ -111,78 +92,7 @@ class _UserFormState extends State<UserForm> {
                           ),
                         ),
                         SizedBox(height: 20.0),
-                        Text('Company Admin'),
-                        SizedBox(height: 5.0),
-                        Row(
-                          children: [
-                            Radio(
-                              value: true,
-                              groupValue: isAdmin,
-                              onChanged: (value) {
-                                setState(() {
-                                  isAdmin = value as bool?;
-                                });
-                              },
-                            ),
-                            Text('Yes'),
-                            Radio(
-                              value: false,
-                              groupValue: isAdmin,
-                              onChanged: (value) {
-                                setState(() {
-                                  isAdmin = value as bool?;
-                                });
-                              },
-                            ),
-                            Text('No'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-               
-                  SizedBox(width: 20.0), // Adjust spacing between columns
-                  // Second Column
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('User Type'),
-                        SizedBox(height: 7.0),
-                        Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
-                          height: _dropFieldHeight,
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: DropdownButton<String>(
-                            value: selectedUserType,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                selectedUserType = newValue;
-                              });
-                            },
-                            underline: Container(),
-                            icon: Icon(Icons.arrow_drop_down),
-                            hint: Text("Select Type"),
-                            isExpanded: true,
-                            items: [
-                              DropdownMenuItem(
-                                value: 'Supervisor',
-                                child: Text('Supervisor'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'Agent',
-                                child: Text('Agent'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 17.0),
-                        Text('Password'),
+                        Text('HOST SMTP'),
                         SizedBox(height: 7.0),
                         Container(
                           width: MediaQuery.of(context).size.width *
@@ -190,9 +100,8 @@ class _UserFormState extends State<UserForm> {
                           height: _textFieldHeight,
                           child: TextFormField(
                             style: TextStyle(fontSize: 16.0),
-                            obscureText: true,
                             decoration: InputDecoration(
-                              hintText: 'Enter Password',
+                              // hintText: 'Enter Name',
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15.0, vertical: 12.0),
                               border: OutlineInputBorder(
@@ -202,6 +111,164 @@ class _UserFormState extends State<UserForm> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 20.0),
+                        Text('HOST PASSWORD'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          height: _textFieldHeight,
+                          child: TextFormField(
+                            style: TextStyle(fontSize: 16.0),
+                            decoration: InputDecoration(
+                              // hintText: 'Enter Name',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 12.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text('HTTPS ENABLE'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          height: _dropFieldHeight,
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: DropdownButton<bool>(
+                            underline: Container(),
+                            isExpanded: true,
+                            value: isTrue,
+                            onChanged: (bool? newValue) {
+                              // Handle dropdown value change
+                              isTrue = newValue!;
+                            },
+                            items: [
+                              DropdownMenuItem<bool>(
+                                value: true,
+                                child: Text('True'),
+                              ),
+                              DropdownMenuItem<bool>(
+                                value: false,
+                                child: Text('False'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(width: 20.0), // Adjust spacing between columns
+                  // Second Column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('STORE TAG'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          height: _textFieldHeight,
+                          child: TextFormField(
+                            style: TextStyle(fontSize: 16.0),
+                            decoration: InputDecoration(
+                              // hintText: 'Enter Name',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 12.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text('HOST PORT'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          height: _textFieldHeight,
+                          child: TextFormField(
+                            style: TextStyle(fontSize: 16.0),
+                            decoration: InputDecoration(
+                              // hintText: 'Enter Name',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 12.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text('BASE URL'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          height: _textFieldHeight,
+                          child: TextFormField(
+                            style: TextStyle(fontSize: 16.0),
+                            decoration: InputDecoration(
+                              // hintText: 'Enter Name',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 12.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text('EMAIL WITH ATTACHMENT'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          height: _dropFieldHeight,
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: DropdownButton<bool>(
+                            value: isTrue,
+                            onChanged: (bool? newValue) {
+                              // Handle dropdown value change
+                              if (newValue != null) {
+                                isTrue = newValue;
+                              }
+                            },
+                            underline: Container(),
+                            icon: Icon(Icons.arrow_drop_down), // Dropdown icon
+                            hint: Text("Select Type"), // Hint text
+                            isExpanded:
+                                true, // Allow the dropdown to expand to full width
+                            items: [
+                              DropdownMenuItem<bool>(
+                                value: true,
+                                child: Text('True'),
+                              ),
+                              DropdownMenuItem<bool>(
+                                value: false,
+                                child: Text('False'),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -211,7 +278,7 @@ class _UserFormState extends State<UserForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Email'),
+                        Text('PAGE SIZE'),
                         SizedBox(height: 7.0),
                         Container(
                           width: MediaQuery.of(context).size.width *
@@ -220,7 +287,7 @@ class _UserFormState extends State<UserForm> {
                           child: TextFormField(
                             style: TextStyle(fontSize: 16.0),
                             decoration: InputDecoration(
-                              hintText: 'Enter Email',
+                              // hintText: 'Enter Name',
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15.0, vertical: 12.0),
                               border: OutlineInputBorder(
@@ -230,8 +297,8 @@ class _UserFormState extends State<UserForm> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10.0),
-                        Text('Confirm Password'),
+                        SizedBox(height: 20.0),
+                        Text('HOST EMAIL'),
                         SizedBox(height: 7.0),
                         Container(
                           width: MediaQuery.of(context).size.width *
@@ -239,9 +306,28 @@ class _UserFormState extends State<UserForm> {
                           height: _textFieldHeight,
                           child: TextFormField(
                             style: TextStyle(fontSize: 16.0),
-                            obscureText: true,
                             decoration: InputDecoration(
-                              hintText: 'Confirm Password',
+                              // hintText: 'Enter Name',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 12.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text('TICKET SUBJECT'),
+                        SizedBox(height: 7.0),
+                        Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.3, // Use 30% of screen width
+                          height: _textFieldHeight,
+                          child: TextFormField(
+                            style: TextStyle(fontSize: 16.0),
+                            decoration: InputDecoration(
+                              // hintText: 'Enter Name',
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15.0, vertical: 12.0),
                               border: OutlineInputBorder(

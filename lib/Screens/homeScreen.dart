@@ -1,9 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, non_constant_identifier_names, unnecessary_null_comparison, unused_local_variable, file_names, unnecessary_string_interpolations, avoid_print
 
+import 'package:dashboard_company/Setting/globalParameterScreen.dart';
 import 'package:dashboard_company/Users/assignUnitScreen.dart';
 import 'package:dashboard_company/Users/unitCameraScreen.dart';
 import 'package:dashboard_company/Users/userScreen.dart';
+import 'package:dashboard_company/unitViolation/agentViolationSummaryScreen.dart';
+import 'package:dashboard_company/unitViolation/agentsViolationReportScreen.dart';
+import 'package:dashboard_company/unitViolation/approvalViolationScreen.dart';
 import 'package:dashboard_company/unitViolation/unitViolationScreen.dart';
+import 'package:dashboard_company/unitViolation/violationListScreen.dart';
+import 'package:dashboard_company/unitViolation/violationSummaryScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -96,25 +102,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
   DateTime? startDate;
   DateTime? endDate;
 
-  // Future<void> _selectDate(BuildContext context, bool isStartDate) async {
-  //   final DateTime picked = (await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2000),
-  //     lastDate: DateTime(2101),
-  //   ))!;
-  //
-  //   if (picked != null) {
-  //     setState(() {
-  //       if (isStartDate) {
-  //         startDate = picked;
-  //       } else {
-  //         endDate = picked;
-  //       }
-  //     });
-  //   }
-  // }
-
   Future<void> StartDate(BuildContext context) async {
     final DateTime picked = (await showDatePicker(
       context: context,
@@ -188,7 +175,30 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
-                          child: git 
+                          child: DropdownButton<String>(
+                            value: selectedCompany,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedCompany = newValue!;
+                              });
+                            },
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              // Adjust the font size as needed
+                              color: Colors.black,
+                            ),
+                            underline: Container(),
+                            // Remove the default underline
+                            icon: Icon(Icons.arrow_drop_down),
+                            // Change the dropdown icon
+                            items: companies
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
                         )
                       ],
                     ),
@@ -272,7 +282,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               Expanded(
                                 child: Text(
                                   startDate != null
-                                      ? "${DateFormat('yyyy-MM-dd').format(startDate!)}"
+                                      ? "${DateFormat('MM-dd-yyyy').format(startDate!)}"
                                       : "Select a date",
                                   style: TextStyle(fontSize: 14),
                                 ),
@@ -317,7 +327,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               Expanded(
                                 child: Text(
                                   endDate != null
-                                      ? "${DateFormat('yyyy-MM-dd').format(endDate!)}"
+                                      ? "${DateFormat('dd-yyyy-MM').format(endDate!)}"
                                       : "Select a date",
                                   style: TextStyle(fontSize: 14),
                                 ),
@@ -880,12 +890,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     // Adjust the height as needed to match ListTile height
                     child: InkWell(
                       onTap: () {
-                                 Navigator.push(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => unitViolationScreen()));
 
-                        
                         // Handle tap on User
                       },
                       hoverColor: Colors.purple.withOpacity(0.2),
@@ -912,6 +921,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     // Adjust the height as needed to match ListTile height
                     child: InkWell(
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => violationListScreen()));
+
                         // Handle tap on User
                       },
                       hoverColor: Colors.purple.withOpacity(0.2),
@@ -938,6 +952,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     // Adjust the height as needed to match ListTile height
                     child: InkWell(
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => approvalViolationScreen()));
+
                         // Handle tap on User
                       },
                       hoverColor: Colors.purple.withOpacity(0.2),
@@ -964,6 +983,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     // Adjust the height as needed to match ListTile height
                     child: InkWell(
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => agentViolationReportScreen()));
+
                         // Handle tap on User
                       },
                       hoverColor: Colors.purple.withOpacity(0.2),
@@ -990,6 +1014,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     // Adjust the height as needed to match ListTile height
                     child: InkWell(
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    violationSummaryScreen()));
                         // Handle tap on User
                       },
                       hoverColor: Colors.purple.withOpacity(0.2),
@@ -1016,6 +1045,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     // Adjust the height as needed to match ListTile height
                     child: InkWell(
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    agentViolationSummaryScreen()));
+
                         // Handle tap on User
                       },
                       hoverColor: Colors.purple.withOpacity(0.2),
@@ -1074,6 +1109,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 // Adjust the height as needed to match ListTile height
                 child: InkWell(
                   onTap: () {
+                       Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    globalParameterScreen()));
+
+                    
                     // Handle tap on User
                   },
                   hoverColor: Colors.purple.withOpacity(0.2),

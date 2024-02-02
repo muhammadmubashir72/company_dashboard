@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class violationSummaryScreen extends StatefulWidget {
+class agentViolationSummaryScreen extends StatefulWidget {
   @override
-  State<violationSummaryScreen> createState() => _violationSummaryScreenState();
+  State<agentViolationSummaryScreen> createState() =>
+      _agentViolationSummaryScreenState();
 }
 
-class _violationSummaryScreenState extends State<violationSummaryScreen> {
+class _agentViolationSummaryScreenState
+    extends State<agentViolationSummaryScreen> {
   String? selectedCompany; // Variable to store selected company
   String? selectedUserType; // Variable to store selected user type
   bool? isAdmin; // Variable to store whether user is admin or not
@@ -53,7 +55,7 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('violation Summary'),
+        title: Text(' AGENTS VIOLATIONS'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -69,7 +71,7 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
               //         .error_outline_outlined), // Add your desired icon here
               //     SizedBox(width: 8), // Adjust spacing as needed
               //     Text(
-              //       'VIOLATION SUMMARY',
+              //       'AGENTS VIOLATIONS',
               //       style: TextStyle(
               //         color: Colors.orange,
               //         fontSize: 24.0,
@@ -91,7 +93,7 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
                         SizedBox(height: 7.0),
                         Container(
                           width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
+                            0.2, // Use 30% of screen width
                           height: _dropFieldHeight,
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
@@ -125,45 +127,6 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
                             isExpanded: true,
                           ),
                         ),
-                        SizedBox(height: 20.0),
-                        Text('VIOLATION CATEGORY'),
-                        SizedBox(height: 7.0),
-                        Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
-                          height: _dropFieldHeight,
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: DropdownButton<String>(
-                            value: selectedCompany,
-                            items: <String>[
-                              'Violation A',
-                              'Violation B',
-                              'Violation C'
-                            ].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                selectedCompany = newValue!;
-                              });
-                            },
-                            style: TextStyle(fontSize: 16.0),
-                            underline: Container(
-                                // height: 2,
-                                // color: Colors.grey,
-                                ),
-                            icon: Icon(Icons.arrow_drop_down),
-                            hint: Text("All"),
-                            isExpanded: true,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -177,7 +140,7 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
                         SizedBox(height: 7.0),
                         Container(
                           width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
+                            0.2, // Use 30% of screen width
                           height: _dropFieldHeight,
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
@@ -208,7 +171,15 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
                             isExpanded: true,
                           ),
                         ),
-                        SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 20.0), // Adjust spacing between columns
+                  // Third Column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(
                           "START_DATE",
                           style: TextStyle(
@@ -223,7 +194,7 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
+                            0.2, // Use 30% of screen width
                           height: _dropFieldHeight,
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
@@ -251,98 +222,61 @@ class _violationSummaryScreenState extends State<violationSummaryScreen> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(width: 20.0), // Adjust spacing between columns
-                  // Third Column
+
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('VIOLATION '),
-                        SizedBox(height: 7.0),
-                        Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
-                          height: _dropFieldHeight,
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: DropdownButton<String>(
-                            value: selectedCompany,
-                            items: <String>['Unit A', 'Unit B', 'Unit C']
-                                .map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                selectedCompany = newValue!;
-                              });
-                            },
-                            style: TextStyle(fontSize: 16.0),
-                            underline: Container(
-                                // height: 2,
-                                // color: Colors.grey,
-                                ),
-                            icon: Icon(Icons.arrow_drop_down),
-                            hint: Text("All"),
-                            isExpanded: true,
-                          ),
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "END DATE",
+                        style: TextStyle(
+                          fontSize: 16,
+                          // fontWeight: FontWeight.bold,
+                          // color: Colors.purple,
+                          // color:  Color(0xffC822FF),
                         ),
-                        SizedBox(height: 20.0),
-                        Text(
-                          "END DATE",
-                          style: TextStyle(
-                            fontSize: 16,
-                            // fontWeight: FontWeight.bold,
-                            // color: Colors.purple,
-                            // color:  Color(0xffC822FF),
-                          ),
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width *
+                            0.2, // Use 30% of screen width
+                        height: _dropFieldHeight,
+                        padding: EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
-                        SizedBox(
-                          height: 7.0,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.3, // Use 30% of screen width
-                          height: _dropFieldHeight,
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Row(
-                            children: [
-                              IconButton(
-                                padding: EdgeInsets.only(bottom: 5),
-                                icon: Icon(
-                                  Icons.date_range,
-                                ),
-                                onPressed: () {
-                                  StartDate(context);
-                                },
+                        child: Row(
+                          children: [
+                            IconButton(
+                              padding: EdgeInsets.only(bottom: 5),
+                              icon: Icon(
+                                Icons.date_range,
                               ),
-                              Expanded(
-                                child: Text(
-                                  endDate != null
-                                      ? "${DateFormat('MM-dd-yyyy').format(endDate!)}"
-                                      : "Select a date",
-                                  style: TextStyle(fontSize: 14),
-                                ),
+                              onPressed: () {
+                                StartDate(context);
+                              },
+                            ),
+                            Expanded(
+                              child: Text(
+                                endDate != null
+                                    ? "${DateFormat('MM-dd-yyyy').format(endDate!)}"
+                                    : "Select a date",
+                                style: TextStyle(fontSize: 14),
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ))
                 ],
               ),
               Divider(

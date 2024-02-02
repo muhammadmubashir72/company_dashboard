@@ -94,33 +94,31 @@ class _unitViolationScreenState extends State<unitViolationScreen> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: DropdownButton<String>(
-  value: selectedCompany,
-  items: <String>[
-    'Company A',
-    'Company B',
-    'Company C'
-  ].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-  onChanged: (newValue) {
-    if (newValue != selectedCompany) { // Check if the new value is different
-      setState(() {
-        selectedCompany = newValue!;
-      });
-    }
-  },
-  style: TextStyle(fontSize: 16.0),
-  underline: Container(),
-  icon: Icon(Icons.arrow_drop_down),
-  hint: Text("Select Company"),
-  isExpanded: true,
-),
-
-
-
+                            value: selectedCompany,
+                            items: <String>[
+                              'Company A',
+                              'Company B',
+                              'Company C'
+                            ].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              if (newValue != selectedCompany) {
+                                // Check if the new value is different
+                                setState(() {
+                                  selectedCompany = newValue!;
+                                });
+                              }
+                            },
+                            style: TextStyle(fontSize: 16.0),
+                            underline: Container(),
+                            icon: Icon(Icons.arrow_drop_down),
+                            hint: Text("Select Company"),
+                            isExpanded: true,
+                          ),
                         ),
                         SizedBox(height: 20.0),
                         Text('Violation'),
